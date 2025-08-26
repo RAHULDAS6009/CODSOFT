@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Rahul</h1>
+      <p>Web Developer | Problem Solver</p>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="reveal">
+      <h2>About Me</h2>
+      <div>
+        <img src="./profilephoto.jpg" />
+        <p>
+          Hello! I am a passionate web developer who loves creating beautiful
+          and functional websites. I enjoy learning new technologies and
+          building real-world projects that make a difference in people's lives.
+        </p>
+      </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills reveal">
+      <h2>Skills</h2>
+      <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Node.js</li>
+        <li>TypeScript</li>
+        <li>MongoDB</li>
+      </ul>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="reveal">
+      <h2>Projects</h2>
+      <div class="projects">
+        <div class="project-card">
+          <a href="https://github.com/RAHULDAS6009/medium">
+            <img src="medium.png" />
+          </a>
+          <div class="project-card-content">
+            <h3>Medium</h3>
+            <p>
+              A Medium-inspired blogging platform built with MERN stack,
+              featuring rich text editing, user authentication, and content
+              publishing..
+            </p>
+          </div>
+        </div>
+        <div class="project-card">
+          <a href="https://github.com/RAHULDAS6009/almsetufe">
+            <img src="./almasetu.png" />
+          </a>
+          <div class="project-card-content">
+            <h3>Almasetu</h3>
+            <p>
+              A networking platform for students and alumni, built with MERN
+              stack, enabling meaningful connections, mentorship, and career
+              growth opportunities.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section class="resume reveal">
+      <h2>Resume</h2>
+      <div>
+        <a href="./resume.pdf" download="Rahul_Das_Resume.pdf"
+          >Download My Resume</a
+        >
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact reveal">
+      <h2>Contact Me</h2>
+      <p onclick="copyToClipboard('yourname@example.com')">
+        📧 das206053@gmail.com
+      </p>
+      <!-- <p onclick="copyToClipboard('+91 12345 67890')">📱 +91 12345 67890</p> -->
+      <p
+        onclick="window.open('https://linkedin.com/in/rahul-das-9906a624a', '_blank')"
+      >
+        🔗 LinkedIn Profile
+      </p>
+      <p onclick="window.open('https://github.com/RAHULDAS6009', '_blank')">
+        💻 Github Profile
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2025 Rahul Das. All Rights Reserved.</p>
+    </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>
