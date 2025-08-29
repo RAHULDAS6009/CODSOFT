@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LaughHub - Your Comedy Universe</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        line-height: 1.6;
+        overflow-x: hidden;
+        background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+      }
+
+      /* Header */
+      .header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background: rgba(255, 215, 0, 0.95);
+        backdrop-filter: blur(10px);
+        padding: 1rem 2rem;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .logo {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.1) rotate(-5deg);
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .nav-links a:hover {
+        color: #ff6b35;
+        transform: translateY(-2px);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #ff6b35;
+        transition: width 0.3s ease;
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .cta-btn {
+        background: linear-gradient(45deg, #ff6b35, #f7931e);
+        color: white;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+      }
+
+      /* Hero Section */
+      .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        z-index: 2;
+        animation: fadeInUp 1s ease;
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        color: #333;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        animation: bounceIn 1.2s ease;
+      }
+
+      .hero p {
+        font-size: 1.5rem;
+        color: #666;
+        margin-bottom: 2rem;
+        animation: fadeInUp 1s ease 0.3s both;
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        animation: fadeInUp 1s ease 0.6s both;
+      }
+
+      .btn-primary {
+        background: linear-gradient(45deg, #333, #555);
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: #333;
+        padding: 1rem 2rem;
+        border: 2px solid #333;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .btn-secondary:hover {
+        background: #333;
+        color: white;
+        transform: translateY(-3px);
+      }
+
+      /* Floating Elements */
+      .floating-emoji {
+        position: absolute;
+        font-size: 3rem;
+        animation: float 6s ease-in-out infinite;
+        opacity: 0.7;
+      }
+
+      .floating-emoji:nth-child(1) {
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+      }
+
+      .floating-emoji:nth-child(2) {
+        top: 60%;
+        right: 15%;
+        animation-delay: 2s;
+      }
+
+      .floating-emoji:nth-child(3) {
+        bottom: 20%;
+        left: 20%;
+        animation-delay: 4s;
+      }
+
+      /* Features Section */
+      .features {
+        padding: 5rem 2rem;
+        background: white;
+        position: relative;
+      }
+
+      .features-container {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 3rem;
+        color: #333;
+        margin-bottom: 3rem;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: linear-gradient(45deg, #ffd700, #ff6b35);
+        border-radius: 2px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 4rem;
+      }
+
+      .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
+        cursor: pointer;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        border-color: #ffd700;
+      }
+
+      .feature-icon {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      .feature-card:hover .feature-icon {
+        transform: scale(1.2) rotate(10deg);
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+
+      .feature-card p {
+        color: #666;
+        line-height: 1.8;
+      }
+
+      /* Stats Section */
+      .stats {
+        padding: 4rem 2rem;
+        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        color: white;
+      }
+
+      .stats-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .stat-item {
+        padding: 1rem;
+        transition: transform 0.3s ease;
+      }
+
+      .stat-item:hover {
+        transform: scale(1.1);
+      }
+
+      .stat-number {
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        counter-reset: number;
+        animation: countUp 2s ease-in-out;
+      }
+
+      .stat-label {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+
+      /* Footer */
+      .footer {
+        background: #333;
+        color: white;
+        padding: 3rem 2rem 1rem;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+      }
+
+      .footer-section h4 {
+        color: #ffd700;
+        margin-bottom: 1rem;
+        font-size: 1.3rem;
+      }
+
+      .footer-section a {
+        color: #ccc;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+        transition: color 0.3s ease;
+      }
+
+      .footer-section a:hover {
+        color: #ffd700;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid #555;
+        color: #999;
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes bounceIn {
+        0% {
+          opacity: 0;
+          transform: scale(0.3);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+        70% {
+          transform: scale(0.9);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      @keyframes countUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.2rem;
+        }
+
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .floating-emoji {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav-container">
+        <a href="#" class="logo">🎭 LaughHub</a>
+        <ul class="nav-links">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#comedians">Comedians</a></li>
+          <li><a href="#shows">Shows</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="cta-btn">Join Now</button>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+      <div class="floating-emoji">😂</div>
+      <div class="floating-emoji">🤣</div>
+      <div class="floating-emoji">😄</div>
+
+      <div class="hero-content">
+        <h1>Welcome to LaughHub</h1>
+        <p>
+          Your ultimate destination for comedy shows, stand-up specials, and
+          hilarious content from around the world
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary">Start Watching</button>
+          <button class="btn-secondary">Browse Shows</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="features-container">
+        <h2 class="section-title">Why Choose LaughHub?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">🎪</div>
+            <h3>Live Shows</h3>
+            <p>
+              Watch live comedy shows from top comedians around the world.
+              Interactive experience with real-time chat and reactions.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📺</div>
+            <h3>On-Demand Content</h3>
+            <p>
+              Access thousands of comedy specials, sketches, and shows available
+              24/7. Never miss your favorite comedian's latest material.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🌟</div>
+            <h3>Exclusive Content</h3>
+            <p>
+              Get access to exclusive content from emerging comedians and
+              behind-the-scenes footage from your favorite shows.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Multi-Platform</h3>
+            <p>
+              Watch on any device - phone, tablet, TV, or computer. Seamless
+              streaming experience across all platforms.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Personalized</h3>
+            <p>
+              AI-powered recommendations based on your humor preferences.
+              Discover new comedians that match your taste.
+            </p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💬</div>
+            <h3>Community</h3>
+            <p>
+              Join a community of comedy lovers. Share laughs, discuss shows,
+              and connect with fellow comedy enthusiasts.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stats-container">
+        <div class="stat-item">
+          <div class="stat-number" data-target="50000">0</div>
+          <div class="stat-label">Happy Users</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="1200">0</div>
+          <div class="stat-label">Comedy Shows</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="300">0</div>
+          <div class="stat-label">Comedians</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number" data-target="24">0</div>
+          <div class="stat-label">Countries</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-section">
+          <h4>About LaughHub</h4>
+          <p>
+            The world's premier comedy streaming platform, bringing you the best
+            in stand-up, sketches, and comedy shows from around the globe.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <a href="#">Home</a>
+          <a href="#">Shows</a>
+          <a href="#">Comedians</a>
+          <a href="#">Pricing</a>
+          <a href="#">Support</a>
+        </div>
+        <div class="footer-section">
+          <h4>Categories</h4>
+          <a href="#">Stand-up</a>
+          <a href="#">Sketches</a>
+          <a href="#">Improv</a>
+          <a href="#">Roasts</a>
+          <a href="#">International</a>
+        </div>
+        <div class="footer-section">
+          <h4>Connect</h4>
+          <a href="#">Facebook</a>
+          <a href="#">Twitter</a>
+          <a href="#">Instagram</a>
+          <a href="#">YouTube</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          &copy; 2025 LaughHub. All rights reserved. | Privacy Policy | Terms of
+          Service
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.querySelector(".header");
+        if (window.scrollY > 100) {
+          header.style.background = "rgba(255, 215, 0, 0.98)";
+          header.style.boxShadow = "0 2px 20px rgba(0,0,0,0.1)";
+        } else {
+          header.style.background = "rgba(255, 215, 0, 0.95)";
+          header.style.boxShadow = "none";
+        }
+      });
+
+      // Animated counter for stats
+      function animateCounter(element, target, duration) {
+        let start = 0;
+        const increment = target / (duration / 16);
+        const timer = setInterval(() => {
+          start += increment;
+          element.textContent = Math.floor(start);
+          if (start >= target) {
+            element.textContent = target.toLocaleString();
+            clearInterval(timer);
+          }
+        }, 16);
+      }
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+
+            // Animate counters when stats section is visible
+            if (entry.target.classList.contains("stats")) {
+              const statNumbers = entry.target.querySelectorAll(".stat-number");
+              statNumbers.forEach((stat) => {
+                const target = parseInt(stat.getAttribute("data-target"));
+                animateCounter(stat, target, 2000);
+              });
+            }
+          }
+        });
+      }, observerOptions);
+
+      // Observe elements for animation
+      document.querySelectorAll(".feature-card, .stats").forEach((el) => {
+        el.style.opacity = "0";
+        el.style.transform = "translateY(30px)";
+        el.style.transition = "all 0.6s ease";
+        observer.observe(el);
+      });
+
+      // Button click effects
+      document.querySelectorAll("button").forEach((button) => {
+        button.addEventListener("click", function (e) {
+          const ripple = document.createElement("span");
+          const rect = this.getBoundingClientRect();
+          const size = Math.max(rect.width, rect.height);
+          const x = e.clientX - rect.left - size / 2;
+          const y = e.clientY - rect.top - size / 2;
+
+          ripple.style.width = ripple.style.height = size + "px";
+          ripple.style.left = x + "px";
+          ripple.style.top = y + "px";
+          ripple.classList.add("ripple");
+
+          this.appendChild(ripple);
+
+          setTimeout(() => {
+            ripple.remove();
+          }, 600);
+        });
+      });
+
+      // CSS for ripple effect
+      const style = document.createElement("style");
+      style.textContent = `
+            button {
+                position: relative;
+                overflow: hidden;
+            }
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+      document.head.appendChild(style);
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Feature cards hover sound effect (visual feedback)
+      document.querySelectorAll(".feature-card").forEach((card) => {
+        card.addEventListener("mouseenter", function () {
+          this.style.transform = "translateY(-10px) scale(1.02) rotateY(5deg)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          this.style.transform = "translateY(0) scale(1) rotateY(0)";
+        });
+      });
+
+      // Logo click animation
+      document.querySelector(".logo").addEventListener("click", function (e) {
+        e.preventDefault();
+        this.style.animation = "none";
+        setTimeout(() => {
+          this.style.animation = "bounceIn 0.8s ease";
+        }, 10);
+      });
+    </script>
+  </body>
+</html>
